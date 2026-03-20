@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GigShield | Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="dashboard-body">
+
+  <div class="dashboard-bg-orb orb-a"></div>
+  <div class="dashboard-bg-orb orb-b"></div>
+
+  <header class="topbar glass">
+    <div class="topbar-left">
+      <div class="logo-circle sm">GS</div>
+      <div>
+        <h1>GigShield</h1>
+        <p>Adversarial Defense & Anti-Spoofing Prototype</p>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="user-badge">
+        <span class="user-label">Logged in as</span>
+        <strong id="welcomeUser">Team Lead</strong>
+      </div>
+      <button class="btn btn-secondary" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="hero glass">
+      <div class="hero-text">
+        <span class="hero-tag">AI-Powered Claim Validation Engine</span>
+        <h2>Insurance Fraud Detection for Gig Worker Parametric Claims</h2>
+        <p>
+          This prototype evaluates whether a claim is genuine, suspicious, or likely spoofed
+          using contextual, behavioral, and device-level signals instead of trusting GPS alone.
+        </p>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span>Defense Layers</span>
+          <strong>3</strong>
+        </div>
+        <div class="stat-card">
+          <span>Signals Used</span>
+          <strong>10</strong>
+        </div>
+        <div class="stat-card">
+          <span>Decision Classes</span>
+          <strong>3</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="layers-grid">
+      <div class="mini-card glass">
+        <h3>1. Context Validation</h3>
+        <p>Weather severity, zone consistency, active delivery state, and recent activity.</p>
+      </div>
+      <div class="mini-card glass">
+        <h3>2. Device Trust Layer</h3>
+        <p>GPS accuracy, spoofing risk, integrity score, and movement realism.</p>
+      </div>
+      <div class="mini-card glass">
+        <h3>3. Fraud Ring Detection</h3>
+        <p>Mass-claim clustering and suspicious coordinated payout attempts.</p>
+      </div>
+    </section>
+
+    <section class="main-grid">
+      <div class="panel glass">
+        <div class="panel-header">
+          <h3>Claim Evaluation Inputs</h3>
+          <p>Adjust the values below and run the anti-spoofing engine.</p>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label>Worker ID</label>
+            <input type="text" id="workerId" value="GW-DP-1024" />
+          </div>
+
+          <div class="field">
+            <label>Registered Work Zone Latitude</label>
+            <input type="number" id="registeredLat" value="13.0827" step="0.0001" />
+          </div>
+
+          <div class="field">
+            <label>Registered Work Zone Longitude</label>
+            <input type="number" id="registeredLon" value="80.2707" step="0.0001" />
+          </div>
+
+          <div class="field">
+            <label>Claimed Current Latitude</label>
+            <input type="number" id="claimedLat" value="13.0674" step="0.0001" />
+          </div>
+
+          <div class="field">
+            <label>Claimed Current Longitude</label>
+            <input type="number" id="claimedLon" value="80.2376" step="0.0001" />
+          </div>
+        </div>
+
+        <div class="slider-grid">
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>Weather Severity</label>
+    </div>
+    <input type="number" id="weather" min="0" max="10" value="8" class="number-box" />
+  </div>
+
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>GPS Accuracy (meters)</label>
+    </div>
+    <input type="number" id="gps" min="1" max="200" value="18" class="number-box" />
+  </div>
+
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>Deliveries in Last 2 Hours</label>
+    </div>
+    <input type="number" id="deliveryCount" min="0" max="10" value="4" class="number-box" />
+  </div>
+
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>Hours Since Last Delivery</label>
+    </div>
+    <input type="number" id="hours" min="0" max="24" value="1" class="number-box" />
+  </div>
+
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>Device Spoofing Risk</label>
+    </div>
+    <input type="number" id="spoof" min="0" max="10" value="2" class="number-box" />
+  </div>
+
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>Device Integrity Score</label>
+    </div>
+    <input type="number" id="integrity" min="0" max="10" value="8" class="number-box" />
+  </div>
+
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>Similar Claims from Same Zone</label>
+    </div>
+    <input type="number" id="mass" min="0" max="50" value="3" class="number-box" />
+  </div>
+
+  <div class="slider-card">
+    <div class="slider-head">
+      <label>Recent Movement Speed (km/h)</label>
+    </div>
+    <input type="number" id="speed" min="0" max="120" value="22" class="number-box" />
+  </div>
+</div>
+
+        <div class="toggle-row">
+          <label class="toggle-pill">
+            <input type="checkbox" id="activeDelivery" checked />
+            <span>Active Delivery Session Detected</span>
+          </label>
+
+          <label class="toggle-pill">
+            <input type="checkbox" id="networkDrop" checked />
+            <span>Network Drop Observed</span>
+          </label>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-primary" onclick="evaluateClaim()">Evaluate Claim</button>
+          <button class="btn btn-secondary" onclick="loadTrustedCase()">Trusted Case</button>
+          <button class="btn btn-secondary" onclick="loadReviewCase()">Manual Review Case</button>
+          <button class="btn btn-secondary" onclick="loadSpoofCase()">Spoofed Case</button>
+        </div>
+      </div>
+
+      <div class="panel glass result-panel">
+        <div class="panel-header">
+          <h3>Decision Output</h3>
+          <p>Real-time explainable scoring and adjudication result.</p>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric-card">
+            <span>Distance from Work Zone</span>
+            <strong id="distanceMetric">--</strong>
+          </div>
+          <div class="metric-card">
+            <span>Trust Score</span>
+            <strong id="trustMetric">--</strong>
+          </div>
+          <div class="metric-card">
+            <span>Fraud Score</span>
+            <strong id="fraudMetric">--</strong>
+          </div>
+          <div class="metric-card">
+            <span>Final Score</span>
+            <strong id="finalMetric">--</strong>
+          </div>
+        </div>
+
+        <div id="decisionBanner" class="decision-banner neutral">
+          Run evaluation to see the claim decision.
+        </div>
+
+        <div id="actionBox" class="info-box">
+          Action: Awaiting evaluation.
+        </div>
+
+        <div id="alertBox" class="alert-box hidden"></div>
+
+        <div class="info-box fairness-box">
+          🛡️ Fairness Layer: Suspicious claims are not rejected instantly. They are routed to manual review to protect genuine workers during real disruptions.
+        </div>
+
+        <div class="reason-section">
+          <h4>Why this decision was made</h4>
+          <ul id="reasonsList" class="reason-list">
+            <li>Evaluation has not been run yet.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
